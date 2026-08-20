@@ -126,7 +126,7 @@
     "fgc": {
       "bindings": [
         [48, "start"],
-        [3, "left_stick_click"],
+        [33, "left_stick_click"],
         [2, "dpad_left"],
         [1, "dpad_down"],
         [0, "dpad_right"],
