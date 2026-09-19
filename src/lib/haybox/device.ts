@@ -147,6 +147,16 @@ export class SerialDeviceManager extends ConnectionManager {
 
     this.config.gameModeConfigs = config.gameModes.map((mode) => internalToHayboxGameMode(this.config, layout, mode));
 
+    // Update the default mode in device config
+    const defaultModeConfig = this.config.gameModeConfigs.findIndex(gc => 
+      HAYBOX_TO_MODE[gc.modeId] === config.defaultMode
+    ) + 1; // Convert to 1-based index
+    
+    // Set default mode for all backends
+    for (const backendConfig of this.config.communicationBackendConfigs) {
+      backendConfig.defaultModeConfig = defaultModeConfig;
+    }
+
     this.config.projectMOptions = internalToHayboxProjectMOptions(config.projectMOptions);
     this.config.meleeOptions = internalToHayboxMeleeOptions(config.meleeOptions);
 

@@ -30,9 +30,10 @@ const modes = computed(() => {
 
   return [...deviceManager.modes.values()].map((x) => {
     const modeConfig = deviceManager.config?.gameModes.find((c) => c.id === x.id);
+    const isDefault = x.id === deviceManager.config?.defaultMode;
     return {
       id: x.id,
-      name: gameModeToName(x.id),
+      name: `${gameModeToName(x.id)}${isDefault ? ' (Default)' : ''}`,
       activation: x.activationBinding.map((physical) => {
         const remapped = modeConfig?.buttonRemapping.find((r) => r.physical === physical);
         if (remapped) {

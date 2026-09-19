@@ -204,6 +204,12 @@ export const useDeviceManager = defineStore('device_manager', () => {
   async function saveConfig(): Promise<boolean> {
     if (manager.value == null || !config.value || !layout.value) return false;
 
+    // Set the default mode to the current active profile
+    const activeProfile = useActiveProfile();
+    if (activeProfile.value) {
+      config.value.defaultMode = activeProfile.value;
+    }
+
     writeRemaps();
     writeOptions();
 
@@ -211,6 +217,11 @@ export const useDeviceManager = defineStore('device_manager', () => {
       if (await manager.value.setConfig(layout.value, config.value)) {
         originalConfig.value = { ...config.value };
         notifyConfigSaved();
+        const { toast } = useToast();
+        toast({
+          title: 'Config saved successfully',
+          description: 'Device configuration has been updated',
+        });
         return true;
       }
     } catch (e) {

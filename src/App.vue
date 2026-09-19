@@ -74,7 +74,7 @@ watch(route, onRouteSwitch, { immediate: true });
         <h3>GRAMCTRL & AEROKEY LABS</h3>
       </div>
 
-      <h2 v-else class="text-2xl">Designed by: GRAMCTRL & AEROKEY LABS</h2>
+      <h2 v-else class="text-2xl">Designed by: GRAMCTRL, AEROKEY LABS & SpooX</h2>
     </div>
 
     <RouterView />
